@@ -1,0 +1,19 @@
+biolib_version: 2
+
+modules:
+    main:
+        image: 'local-docker://cluster_species:latest'
+        command: python3 launch.py
+        working_directory: /app/
+        input_files:
+            - COPY / /app/
+        output_files:
+            - COPY /app/ /
+        data_records: 
+            -
+                uri: 'ncRNA-foundational-model/new-homology-datasets-flanked:0.0.2'
+                target_path: '/app/conserved_rnas_filtered_flanked/'
+        default_machine: 'cpu.xlarge' 
+
+arguments: []
+

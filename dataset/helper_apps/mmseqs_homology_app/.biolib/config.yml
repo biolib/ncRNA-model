@@ -1,0 +1,19 @@
+biolib_version: 2
+
+modules:
+    main:
+        image: 'local-docker://homology_species:latest'
+        command: python3 launch.py
+        working_directory: /app/
+        input_files:
+            - COPY / /app/
+        output_files:
+            - COPY /app/ /
+        data_records: 
+            -
+                uri: 'ncRNA-foundational-model/non-coding-filtered-MAM-PRI-ROD-TSA:0.0.4'
+                target_path: '/app/non_coding_sequences/'
+        default_machine: 'cpu.xlarge' 
+
+arguments: []
+

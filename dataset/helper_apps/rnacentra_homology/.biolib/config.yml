@@ -1,0 +1,30 @@
+biolib_version: 2
+
+modules:
+    main:
+        image: 'local-docker://rnacentral_homology:latest'
+        command: python3 launch.py
+        working_directory: /app/
+        input_files:
+            - COPY / /app/
+        output_files:
+            - COPY /app/output/ /
+        data_records: 
+            -
+                uri: 'ncRNA-foundational-model/RNACentral:0.0.2'
+                target_path: '/rnacentral/'
+            -
+                uri: 'ncRNA-foundational-model/clustered-dataset-new:0.0.2'
+                target_path: '/app/data/pretrain_data/'
+            -
+                uri: 'ncRNA-foundational-model/clustered-dataset-flanked-new:0.0.2'
+                target_path: '/app/data/pretrain_data_flanked/'
+        
+        default_machine: 'cpu.xlarge' 
+
+arguments:
+  - key: '--input'
+    description: 'input'
+    type: 'file'
+    required: true
+
