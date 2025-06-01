@@ -1,0 +1,8 @@
+env:
+  path: "/home/ec2-user/rna1/.env"
+wandb:
+  project: "rna1-pretrain-deep-shallow"
+  entity: "tomanova-university-of-copenhagen"
+  name: "mlm-1dcnn"
+  mode: "online"
+  

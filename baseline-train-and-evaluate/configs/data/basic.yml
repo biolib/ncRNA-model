@@ -1,0 +1,7 @@
+data:
+  dataset_root: "."
+  dataset_filename: ""
+  max_length: 512
+  train_split: 0.95
+  mask_prob: 0.15
+  seed: 42

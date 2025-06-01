@@ -1,0 +1,12 @@
+model:
+  embedding_dim: 64
+  hidden_dim: 128
+  num_layers: 2
+  kernel_size: 11
+  dropout_rate: 0.1
+
+training:
+  batch_size: 2048
+  num_epochs: 50
+  learning_rate: 0.001
+  model_save_path: "/home/biolib/output"

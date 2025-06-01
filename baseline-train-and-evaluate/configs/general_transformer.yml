@@ -1,0 +1,8 @@
+env:
+  path: "/home/ec2-user/rna1/.env"
+wandb:
+  project: "rna1-transformer"
+  entity: "tomanova-university-of-copenhagen"
+  name: "transformer-800k"
+  mode: "online"
+  

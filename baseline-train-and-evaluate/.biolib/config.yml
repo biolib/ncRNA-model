@@ -1,0 +1,78 @@
+biolib_version: 2
+
+modules:
+  main:
+    image: 'local-docker://baseline-train-and-evaluate_cuda:latest'
+    command: "python3 main.py"
+    working_directory: "/home/biolib/"
+    input_files:
+      - COPY / /home/biolib/
+    output_files:
+      - COPY /home/biolib/output/ /
+    default_machine: 'gpu.medium'
+    data_records: 
+      -
+        uri: 'ncRNA-foundational-model/finetune-data:0.0.2'
+        target_path: '/home/biolib/finetune_data/'
+      -
+        uri: 'ncRNA-foundational-model/clustered-dataset-new:0.0.2'
+        target_path: '/home/biolib/data/pretrain_data/'
+      -
+        uri: 'ncRNA-foundational-model/clustered-dataset-flanked-new:0.0.2'
+        target_path: '/home/biolib/data/pretrain_data_flanked/'
+    secrets:  
+      WANDB_API_KEY: "WANDB_API_KEY"
+    
+reserved_machines: 1
+
+remote_hosts:
+  - 'wandb.ai'
+  - 'api.wandb.ai'
+arguments: 
+- key: '--model_architecture'
+  description: 'Model architecture to use.'
+  type: dropdown
+  options:
+    'CNN': 'cnn'
+    'Transformer': 'transformer'
+  default_value: 'cnn'
+  required: true
+  sub_arguments:
+    'cnn':
+      - key: '--cnn_model_config_template'
+        description: 'Config'
+        type: text-file
+        default_value: 'configs/model/1d_cnn.yml'
+        required: false
+    'transformer':
+      - key: '--transformer_model_config_template'
+        description: 'Config'
+        type: text-file
+        default_value: 'configs/model/transformer.yml'
+        required: false
+
+- key: '--input_fasta'
+  description: 'Input FASTA file for pretraining.'
+  type: file
+  required: true
+- key: '--finetune_num_epochs'
+  description: 'Number of epochs for fine-tuning.'
+  type: number
+  default_value: 5
+  required: false
+- key: '--finetune_unfreeze_epoch'
+  description: 'Epoch to unfreeze backbone during fine-tuning (-1 to keep frozen).'
+  type: number
+  default_value: 0
+  required: false
+- key: '--start_subset_size'
+  description: 'Start subset size for pretraining.'
+  type: number
+  default_value: 10
+  required: false
+- key: '--finetune_max_seq_len'
+  description: 'Finetune max seq len'
+  type: number
+  default_value: 1024
+  required: false
+  

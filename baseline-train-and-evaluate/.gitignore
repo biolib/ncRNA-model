@@ -1,0 +1,15 @@
+finetune-data/
+*.log
+*.pth
+*.fasta
+*/__pycache__/
+output/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+clustered-dataset-flanked-new/
+clustered-dataset-new/
